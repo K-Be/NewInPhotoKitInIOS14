@@ -1,0 +1,91 @@
+{
+  "name": "RAVPresentersKit",
+  "version": "0.4.6",
+  "summary": "The easiest way to build lists view with models",
+  "homepage": "https://github.com/K-Be/RAVPresentersKit.git",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Andrew Romanov": "scalli-k-be@ya.ru"
+  },
+  "source": {
+    "git": "https://github.com/K-Be/RAVPresentersKit.git",
+    "tag": "0.4.6"
+  },
+  "requires_arc": true,
+  "platforms": {
+    "ios": "7.0"
+  },
+  "frameworks": "CoreGraphics",
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": [
+        "TableController/RAVPresentersKit/Core/*.{h,m}",
+        "TableController/RAVPresentersKit/Core/models/*.{h,m}",
+        "TableController/RAVPresentersKit/utils/*.{h,m}"
+      ],
+      "ios": {
+        "frameworks": [
+          "Foundation",
+          "UIKit"
+        ]
+      }
+    },
+    {
+      "name": "TableController",
+      "source_files": [
+        "TableController/RAVPresentersKit/TableViewController/*.{h,m}",
+        "TableController/RAVPresentersKit/TableViewController/singleModelPresenter/*.{h,m}",
+        "TableController/RAVPresentersKit/TableViewController/universalPresenter/*.{h,m}",
+        "TableController/RAVPresentersKit/TableViewController/universalPresenter/private/*.{h,m}"
+      ],
+      "dependencies": {
+        "RAVPresentersKit/Core": [
+
+        ]
+      },
+      "ios": {
+        "frameworks": [
+          "UIKit",
+          "Foundation"
+        ]
+      }
+    },
+    {
+      "name": "HorizontalViewPresenters",
+      "source_files": [
+        "TableController/RAVPresentersKit/HorizontalView/*.{h,m}",
+        "TableController/RAVPresentersKit/HorizontalView/controller/*.{h,m}"
+      ],
+      "dependencies": {
+        "RAVPresentersKit/Core": [
+
+        ]
+      },
+      "ios": {
+        "frameworks": [
+          "UIKit",
+          "Foundation"
+        ]
+      }
+    },
+    {
+      "name": "CollectionViewPresenters",
+      "source_files": "TableController/RAVPresentersKit/CollectionViewPresenters/*.{h,m}",
+      "dependencies": {
+        "RAVPresentersKit/Core": [
+
+        ]
+      },
+      "ios": {
+        "frameworks": [
+          "UIKit",
+          "Foundation"
+        ]
+      }
+    }
+  ]
+}

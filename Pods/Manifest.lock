@@ -1,0 +1,40 @@
+PODS:
+  - RAVPresentersKit (0.4.6):
+    - RAVPresentersKit/CollectionViewPresenters (= 0.4.6)
+    - RAVPresentersKit/Core (= 0.4.6)
+    - RAVPresentersKit/HorizontalViewPresenters (= 0.4.6)
+    - RAVPresentersKit/TableController (= 0.4.6)
+  - RAVPresentersKit/CollectionViewPresenters (0.4.6):
+    - RAVPresentersKit/Core
+  - RAVPresentersKit/Core (0.4.6)
+  - RAVPresentersKit/HorizontalViewPresenters (0.4.6):
+    - RAVPresentersKit/Core
+  - RAVPresentersKit/TableController (0.4.6):
+    - RAVPresentersKit/Core
+  - RxSwift (5.1.1)
+
+DEPENDENCIES:
+  - RAVPresentersKit (from `https://github.com/K-Be/RAVPresentersKit`, branch `master`)
+  - RxSwift
+
+SPEC REPOS:
+  trunk:
+    - RxSwift
+
+EXTERNAL SOURCES:
+  RAVPresentersKit:
+    :branch: master
+    :git: https://github.com/K-Be/RAVPresentersKit
+
+CHECKOUT OPTIONS:
+  RAVPresentersKit:
+    :commit: 099b0917bd0174167e7ee43d45a12f21cdc93a0b
+    :git: https://github.com/K-Be/RAVPresentersKit
+
+SPEC CHECKSUMS:
+  RAVPresentersKit: 5310f730eb5acf66e0b3d8e58f44f6a9ea35d5bc
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+
+PODFILE CHECKSUM: c820e05d4700998e705938f169bf807fadcabd74
+
+COCOAPODS: 1.10.0

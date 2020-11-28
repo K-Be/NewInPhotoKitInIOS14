@@ -1,0 +1,6 @@
+framework module RAVPresentersKit {
+  umbrella header "RAVPresentersKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

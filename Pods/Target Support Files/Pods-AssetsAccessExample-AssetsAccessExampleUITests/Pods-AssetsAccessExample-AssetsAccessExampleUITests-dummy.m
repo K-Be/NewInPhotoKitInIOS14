@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_AssetsAccessExample_AssetsAccessExampleUITests : NSObject
+@end
+@implementation PodsDummy_Pods_AssetsAccessExample_AssetsAccessExampleUITests
+@end

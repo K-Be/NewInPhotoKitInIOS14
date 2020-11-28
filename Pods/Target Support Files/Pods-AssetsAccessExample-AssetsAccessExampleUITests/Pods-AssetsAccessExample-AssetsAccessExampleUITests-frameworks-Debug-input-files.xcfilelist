@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-AssetsAccessExample-AssetsAccessExampleUITests/Pods-AssetsAccessExample-AssetsAccessExampleUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/RAVPresentersKit/RAVPresentersKit.framework
+${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
