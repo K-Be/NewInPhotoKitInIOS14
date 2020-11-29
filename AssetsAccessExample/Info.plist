@@ -20,6 +20,8 @@
 	<string>1</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>I need access to photo library</string>
+	<key>NSLocationUsageDescription</key>
+	<string>I need to check access to photos</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>

@@ -8,16 +8,20 @@
 import UIKit
 import RAVPresentersKit
 import Photos
+import CoreLocation
 
 class ViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var openSettingsButton: UIButton!
+    @IBOutlet var locationAccessButton: UIButton!
     private var collectionController = RAVCollectionViewController()
 
     private let imagesManager = PHCachingImageManager()
     private let access = Access()
     private let dataSource = DataSource()
+
+    private lazy var locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,13 @@ class ViewController: UIViewController {
         } else if self.access.access() == .authorized {
             self.obtainAssets()
         }
+
+        self.openSettingsButton.addTarget(self,
+                                          action: #selector(self.goToSettingsAction(_:)),
+                                          for: .touchUpInside)
+        self.locationAccessButton.addTarget(self,
+                                            action: #selector(self.getAccessForLocation(_:)),
+                                            for: .touchUpInside)
     }
 
 }
@@ -51,6 +62,10 @@ extension ViewController {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
                                   options: [UIApplication.OpenExternalURLOptionsKey : Any](),
                                   completionHandler: nil)
+    }
+
+    @objc private func getAccessForLocation(_ sender: Any?) {
+        self.locationManager.requestAlwaysAuthorization()
     }
 
     private func updateViewsVisibility() {
