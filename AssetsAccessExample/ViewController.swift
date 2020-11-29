@@ -65,7 +65,7 @@ extension ViewController {
     }
 
     @objc private func getAccessForLocation(_ sender: Any?) {
-        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
     }
 
     private func updateViewsVisibility() {
