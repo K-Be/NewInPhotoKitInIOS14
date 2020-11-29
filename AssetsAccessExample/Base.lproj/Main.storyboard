@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="103"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YPL-qt-VkB">
-                                        <rect key="frame" x="0.0" y="36.5" width="500" height="30"/>
+                                        <rect key="frame" x="0.0" y="36.5" width="657" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWQ-Y7-8pR">
                                                 <rect key="frame" x="0.0" y="0.0" width="136" height="30"/>
@@ -34,6 +34,10 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7U-bI-Ug0">
                                                 <rect key="frame" x="320" y="0.0" width="180" height="30"/>
                                                 <state key="normal" title="NO Access, Open settings"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtB-kv-iqh">
+                                                <rect key="frame" x="510" y="0.0" width="147" height="30"/>
+                                                <state key="normal" title="SelectWithoutAccess"/>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -56,6 +60,13 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Px1-5p-lLf">
+                                <rect key="frame" x="392" y="619" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="1" constant="240" id="L7d-kQ-oov"/>
+                                    <constraint firstAttribute="height" priority="1" constant="128" id="mVI-X2-8hQ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -63,8 +74,12 @@
                             <constraint firstItem="NSo-NB-JAa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2vB-I4-iuo"/>
                             <constraint firstItem="etl-4p-oZD" firstAttribute="top" secondItem="NSo-NB-JAa" secondAttribute="bottom" id="7Ps-cp-Dmz"/>
                             <constraint firstItem="etl-4p-oZD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BZ1-JT-qLc"/>
+                            <constraint firstItem="Px1-5p-lLf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NSo-NB-JAa" secondAttribute="bottom" constant="10" id="IlL-YO-wgg"/>
+                            <constraint firstItem="Px1-5p-lLf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="PZd-68-8QK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NSo-NB-JAa" secondAttribute="trailing" id="X4x-Xu-j5G"/>
+                            <constraint firstItem="Px1-5p-lLf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="cDE-H8-cVa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="etl-4p-oZD" secondAttribute="trailing" id="hxI-Zj-sSy"/>
+                            <constraint firstItem="Px1-5p-lLf" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="it7-Eu-6oc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="etl-4p-oZD" secondAttribute="bottom" id="trO-sI-8OF"/>
                             <constraint firstItem="NSo-NB-JAa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ygX-tJ-y6n"/>
                         </constraints>
@@ -74,6 +89,8 @@
                         <outlet property="collectionView" destination="etl-4p-oZD" id="gUc-ar-ecx"/>
                         <outlet property="locationAccessButton" destination="rWQ-Y7-8pR" id="Gzb-ZP-j4P"/>
                         <outlet property="openSettingsButton" destination="Z7U-bI-Ug0" id="C2P-u4-ALW"/>
+                        <outlet property="pickedImageView" destination="Px1-5p-lLf" id="hgb-qY-0Jc"/>
+                        <outlet property="selectImageWithoutAccessButton" destination="NtB-kv-iqh" id="Hlt-eJ-3Wb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet var openSettingsButton: UIButton!
     @IBOutlet var locationAccessButton: UIButton!
     @IBOutlet var addImagesForSelectionButton: UIButton!
+    @IBOutlet var selectImageWithoutAccessButton: UIButton!
+    @IBOutlet var pickedImageView: UIImageView!
     private var collectionController = RAVCollectionViewController()
 
     private let imagesManager = PHCachingImageManager()
@@ -24,6 +26,7 @@ class ViewController: UIViewController {
     private let dataSource = DataSource()
 
     private lazy var locationManager = CLLocationManager()
+    private lazy var picker = PickerWithoutAccess()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +53,17 @@ class ViewController: UIViewController {
         self.addImagesForSelectionButton.addTarget(self,
                                                    action: #selector(self.addPhotosIntoLimitedAccess(_:)),
                                                    for: .touchUpInside)
+        self.selectImageWithoutAccessButton.addTarget(self,
+                                                      action: #selector(self.selectWithoutAccess(_:)),
+                                                      for: .touchUpInside)
+    }
+
+    private func notify(message: String) {
+        let controller = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "OK",
+                                           style: .default,
+                                           handler: nil))
+        self.present(controller, animated: true, completion: nil)
     }
 
 }
@@ -69,6 +83,16 @@ extension ViewController {
     @objc private func addPhotosIntoLimitedAccess(_ sender: Any?) {
         if #available(iOS 14.0, *) {
             PHPhotoLibrary.shared().presentLimitedLibraryPicker(from:self)
+        }
+    }
+
+    @objc private func selectWithoutAccess(_ sender: Any?) {
+        self.picker.pickImage(in: self) { [weak self](result:UIImage?) in
+            if let result = result {
+                self?.pickedImageView.image = result
+            } else {
+                self?.notify(message: "Can't load asset")
+            }
         }
     }
 }
@@ -102,6 +126,14 @@ extension ViewController {
                 self.openSettingsButton.setTitle("No access, open settings", for: .normal)
             }
         }
+        let shouldSelectWithoutAccess: Bool
+        if #available(iOS 14.0, *) {
+            shouldSelectWithoutAccess = builder([.denied, .restricted]).contains(access)
+        } else {
+            shouldSelectWithoutAccess = false
+        }
+        self.selectImageWithoutAccessButton.isHidden = !shouldSelectWithoutAccess
+        self.pickedImageView.isHidden = !shouldSelectWithoutAccess
     }
 
     private func obtainAssets() {

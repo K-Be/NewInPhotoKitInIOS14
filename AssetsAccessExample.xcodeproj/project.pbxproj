@@ -25,6 +25,8 @@
 		136880BB2572ABE700967683 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136880BA2572ABE700967683 /* DataSource.swift */; };
 		13E03C3225735881003B54E3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13E03C3125735881003B54E3 /* CoreLocation.framework */; };
 		13E03C3425735887003B54E3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13E03C3325735887003B54E3 /* Photos.framework */; };
+		13E03C3925737E7A003B54E3 /* PickerWithoutAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E03C3825737E7A003B54E3 /* PickerWithoutAccess.swift */; };
+		13E03C3E25738C10003B54E3 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13E03C3D25738C10003B54E3 /* PhotosUI.framework */; };
 		C8BF5B3D48762FA82EDEE3F6 /* Pods_AssetsAccessExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924F1FE93627F749D13E8F96 /* Pods_AssetsAccessExampleTests.framework */; };
 		D9BEE8696E7ED0E8F1D09CF6 /* Pods_AssetsAccessExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62292DA5BDE8B3C51DEB1155 /* Pods_AssetsAccessExample.framework */; };
 		F0083B548E3E9A9421E3E34A /* Pods_AssetsAccessExample_AssetsAccessExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F552D3E2FCDF07CB2EDD76B2 /* Pods_AssetsAccessExample_AssetsAccessExampleUITests.framework */; };
@@ -73,6 +75,8 @@
 		136880BA2572ABE700967683 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		13E03C3125735881003B54E3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		13E03C3325735887003B54E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Photos.framework; sourceTree = DEVELOPER_DIR; };
+		13E03C3825737E7A003B54E3 /* PickerWithoutAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerWithoutAccess.swift; sourceTree = "<group>"; };
+		13E03C3D25738C10003B54E3 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/iOSSupport/System/Library/Frameworks/PhotosUI.framework; sourceTree = DEVELOPER_DIR; };
 		26AAAD80ED600ABB5098D1A2 /* Pods-AssetsAccessExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetsAccessExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-AssetsAccessExampleTests/Pods-AssetsAccessExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5534EF10C3D1826E750E8A29 /* Pods-AssetsAccessExample-AssetsAccessExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetsAccessExample-AssetsAccessExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-AssetsAccessExample-AssetsAccessExampleUITests/Pods-AssetsAccessExample-AssetsAccessExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		56D671B80A4DB29D26985B18 /* Pods-AssetsAccessExample-AssetsAccessExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetsAccessExample-AssetsAccessExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-AssetsAccessExample-AssetsAccessExampleUITests/Pods-AssetsAccessExample-AssetsAccessExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13E03C3E25738C10003B54E3 /* PhotosUI.framework in Frameworks */,
 				13E03C3425735887003B54E3 /* Photos.framework in Frameworks */,
 				13E03C3225735881003B54E3 /* CoreLocation.framework in Frameworks */,
 				D9BEE8696E7ED0E8F1D09CF6 /* Pods_AssetsAccessExample.framework in Frameworks */,
@@ -143,6 +148,7 @@
 				136880352572989A00967683 /* AppDelegate.swift */,
 				136880372572989A00967683 /* SceneDelegate.swift */,
 				136880392572989A00967683 /* ViewController.swift */,
+				13E03C3825737E7A003B54E3 /* PickerWithoutAccess.swift */,
 				136880AB2572A96700967683 /* DataSource */,
 				136880A52572A48C00967683 /* Access */,
 				1368807D25729C0600967683 /* Cells */,
@@ -220,6 +226,7 @@
 		38EC6FFA0DF62B12383E819F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				13E03C3D25738C10003B54E3 /* PhotosUI.framework */,
 				13E03C3325735887003B54E3 /* Photos.framework */,
 				13E03C3125735881003B54E3 /* CoreLocation.framework */,
 				62292DA5BDE8B3C51DEB1155 /* Pods_AssetsAccessExample.framework */,
@@ -486,6 +493,7 @@
 				136880B32572A9B200967683 /* AssetsSectionModel.swift in Sources */,
 				1368808025729C4400967683 /* AssetImageCellModel.swift in Sources */,
 				1368808825729CCA00967683 /* AssetImageCell.swift in Sources */,
+				13E03C3925737E7A003B54E3 /* PickerWithoutAccess.swift in Sources */,
 				1368803A2572989A00967683 /* ViewController.swift in Sources */,
 				1368809225729F7200967683 /* AssetImageCellModelPresenter.swift in Sources */,
 				136880362572989A00967683 /* AppDelegate.swift in Sources */,

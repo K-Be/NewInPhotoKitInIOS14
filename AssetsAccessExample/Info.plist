@@ -22,12 +22,14 @@
 	<string>I need access to photo library</string>
 	<key>NSLocationUsageDescription</key>
 	<string>I need to check access to photos</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>I need to check access to photos</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>I need to check access to photos</string>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-    <key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
-    <true/>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
