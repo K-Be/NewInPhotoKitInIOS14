@@ -8,6 +8,7 @@
 import UIKit
 import RAVPresentersKit
 import Photos
+import PhotosUI
 import CoreLocation
 
 class ViewController: UIViewController {
@@ -15,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var openSettingsButton: UIButton!
     @IBOutlet var locationAccessButton: UIButton!
+    @IBOutlet var addImagesForSelectionButton: UIButton!
     private var collectionController = RAVCollectionViewController()
 
     private let imagesManager = PHCachingImageManager()
@@ -25,22 +27,19 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.dataSource.delegate = self
         // Do any additional setup after loading the view.
         self.configurePresenters()
         self.collectionController.setCollectionView(self.collectionView,
                                                     flowLayout: (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout) )
         self.updateViewsVisibility()
-     //   if self.access.access() == .notDetermined {
-            self.access.requestAuthorization { [weak self](sender) in
-                guard let self = self else {
-                    return
-                }
-                self.updateViewsVisibility()
-                self.obtainAssets()
+        self.access.requestAuthorization { [weak self](sender) in
+            guard let self = self else {
+                return
             }
-//        } else if self.access.access() == .authorized {
-//            self.obtainAssets()
-//        }
+            self.updateViewsVisibility()
+            self.obtainAssets()
+        }
 
         self.openSettingsButton.addTarget(self,
                                           action: #selector(self.goToSettingsAction(_:)),
@@ -48,16 +47,15 @@ class ViewController: UIViewController {
         self.locationAccessButton.addTarget(self,
                                             action: #selector(self.getAccessForLocation(_:)),
                                             for: .touchUpInside)
+        self.addImagesForSelectionButton.addTarget(self,
+                                                   action: #selector(self.addPhotosIntoLimitedAccess(_:)),
+                                                   for: .touchUpInside)
     }
 
 }
 
-//MARK: Private methods
+//MARK: Actions
 extension ViewController {
-    private func configurePresenters() {
-        collectionController.register(AssetImageCellModelPresenter(imageManager: self.imagesManager))
-    }
-
     @objc private func goToSettingsAction(_ sender: Any?) {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
                                   options: [UIApplication.OpenExternalURLOptionsKey : Any](),
@@ -66,6 +64,19 @@ extension ViewController {
 
     @objc private func getAccessForLocation(_ sender: Any?) {
         self.locationManager.requestWhenInUseAuthorization()
+    }
+
+    @objc private func addPhotosIntoLimitedAccess(_ sender: Any?) {
+        if #available(iOS 14.0, *) {
+            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from:self)
+        }
+    }
+}
+
+//MARK: Private methods
+extension ViewController {
+    private func configurePresenters() {
+        collectionController.register(AssetImageCellModelPresenter(imageManager: self.imagesManager))
     }
 
     private func updateViewsVisibility() {
@@ -77,6 +88,20 @@ extension ViewController {
 
         self.collectionView.isHidden = builder([.denied, .notDetermined, .restricted]).contains(access)
         self.openSettingsButton.isHidden = builder([.authorized, .notDetermined]).contains(access)
+        let isLimitedAccess: Bool
+        if #available(iOS 14.0, *) {
+            isLimitedAccess = (access == .limited)
+        } else {
+            isLimitedAccess = false
+        }
+        self.addImagesForSelectionButton.isHidden = !isLimitedAccess
+        if #available(iOS 14.0, *) {
+            if access == .limited {
+                self.openSettingsButton.setTitle("Limited access, open settings", for: .normal)
+            } else {
+                self.openSettingsButton.setTitle("No access, open settings", for: .normal)
+            }
+        }
     }
 
     private func obtainAssets() {
@@ -86,6 +111,13 @@ extension ViewController {
             }
             self.collectionController.model = listModel
         }
+    }
+}
+
+//MARK: DataSourceDelegate
+extension ViewController: DataSourceDelegate {
+    func photosLibraryChanged(_ sender: DataSource) {
+        self.obtainAssets()
     }
 }
 

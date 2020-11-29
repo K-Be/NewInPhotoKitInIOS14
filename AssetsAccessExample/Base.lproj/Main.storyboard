@@ -20,23 +20,31 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSo-NB-JAa">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="103"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWQ-Y7-8pR">
-                                        <rect key="frame" x="0.0" y="36.5" width="136" height="30"/>
-                                        <state key="normal" title="Get location Access"/>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YPL-qt-VkB">
+                                        <rect key="frame" x="0.0" y="36.5" width="500" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWQ-Y7-8pR">
+                                                <rect key="frame" x="0.0" y="0.0" width="136" height="30"/>
+                                                <state key="normal" title="Get location Access"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKE-py-XCb" userLabel="AddImagesForSelection">
+                                                <rect key="frame" x="146" y="0.0" width="164" height="30"/>
+                                                <state key="normal" title="AddImagesForSelection"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7U-bI-Ug0">
+                                                <rect key="frame" x="320" y="0.0" width="180" height="30"/>
+                                                <state key="normal" title="NO Access, Open settings"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rWQ-Y7-8pR" secondAttribute="trailing" constant="20" symbolic="YES" id="E5X-8d-0da"/>
                                     <constraint firstAttribute="height" constant="103" id="GLv-V3-95S"/>
-                                    <constraint firstItem="rWQ-Y7-8pR" firstAttribute="leading" secondItem="NSo-NB-JAa" secondAttribute="leading" id="Z4U-aF-dt6"/>
-                                    <constraint firstItem="rWQ-Y7-8pR" firstAttribute="centerY" secondItem="NSo-NB-JAa" secondAttribute="centerY" id="mtU-xW-Edx"/>
+                                    <constraint firstItem="YPL-qt-VkB" firstAttribute="leading" secondItem="NSo-NB-JAa" secondAttribute="leading" id="KlB-8h-G6A"/>
+                                    <constraint firstItem="YPL-qt-VkB" firstAttribute="centerY" secondItem="NSo-NB-JAa" secondAttribute="centerY" id="tKT-vO-xbO"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7U-bI-Ug0">
-                                <rect key="frame" x="422" y="668" width="180" height="30"/>
-                                <state key="normal" title="NO Access, Open settings"/>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="etl-4p-oZD">
                                 <rect key="frame" x="0.0" y="103" width="1024" height="1263"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -56,14 +64,13 @@
                             <constraint firstItem="etl-4p-oZD" firstAttribute="top" secondItem="NSo-NB-JAa" secondAttribute="bottom" id="7Ps-cp-Dmz"/>
                             <constraint firstItem="etl-4p-oZD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BZ1-JT-qLc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NSo-NB-JAa" secondAttribute="trailing" id="X4x-Xu-j5G"/>
-                            <constraint firstItem="Z7U-bI-Ug0" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="eOP-OK-bvL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="etl-4p-oZD" secondAttribute="trailing" id="hxI-Zj-sSy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="etl-4p-oZD" secondAttribute="bottom" id="trO-sI-8OF"/>
-                            <constraint firstItem="Z7U-bI-Ug0" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="xdh-id-ejb"/>
                             <constraint firstItem="NSo-NB-JAa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ygX-tJ-y6n"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addImagesForSelectionButton" destination="WKE-py-XCb" id="Dhi-Mf-b4b"/>
                         <outlet property="collectionView" destination="etl-4p-oZD" id="gUc-ar-ecx"/>
                         <outlet property="locationAccessButton" destination="rWQ-Y7-8pR" id="Gzb-ZP-j4P"/>
                         <outlet property="openSettingsButton" destination="Z7U-bI-Ug0" id="C2P-u4-ALW"/>

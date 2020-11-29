@@ -8,7 +8,20 @@
 import Foundation
 import Photos
 
-class DataSource {
+protocol DataSourceDelegate: AnyObject {
+    func photosLibraryChanged(_ sender: DataSource)
+}
+
+@objc class DataSource: NSObject, PHPhotoLibraryChangeObserver {
+    weak var delegate: DataSourceDelegate?
+    var fetchResult: PHFetchResult<PHAsset>?
+
+    override init() {
+        super.init()
+        PHPhotoLibrary.shared().register(self)
+    }
+
+
 
     func loadDataFromAlbum(_ album:PHAssetCollectionSubtype?, withCompletion completion: @escaping (_ listModel:AssetsListModel)->Void) {
         DispatchQueue.global(qos: .userInitiated).async {
@@ -29,10 +42,26 @@ class DataSource {
             } else {
                 result = PHAsset.fetchAssets(with: options)
             }
+            self.fetchResult = result
             let listModel = AssetsListModel(withFetchResult: result)
             DispatchQueue.main.async {
                 completion(listModel)
             }
         }
     }
+
+    //MARK: PHPhotosLibraryObserver
+    func photoLibraryDidChange(_ changeInstance: (PHChange)) {
+        guard let fetchResult = self.fetchResult else {
+            return
+        }
+        if changeInstance.changeDetails(for: fetchResult) != nil {
+            DispatchQueue.main.async {
+                self.delegate?.photosLibraryChanged(self)
+            }
+        }
+    }
 }
+
+
+
