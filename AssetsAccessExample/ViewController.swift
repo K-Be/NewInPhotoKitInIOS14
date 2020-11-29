@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         self.collectionController.setCollectionView(self.collectionView,
                                                     flowLayout: (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout) )
         self.updateViewsVisibility()
-        if self.access.access() == .notDetermined {
+     //   if self.access.access() == .notDetermined {
             self.access.requestAuthorization { [weak self](sender) in
                 guard let self = self else {
                     return
@@ -38,9 +38,9 @@ class ViewController: UIViewController {
                 self.updateViewsVisibility()
                 self.obtainAssets()
             }
-        } else if self.access.access() == .authorized {
-            self.obtainAssets()
-        }
+//        } else if self.access.access() == .authorized {
+//            self.obtainAssets()
+//        }
 
         self.openSettingsButton.addTarget(self,
                                           action: #selector(self.goToSettingsAction(_:)),
