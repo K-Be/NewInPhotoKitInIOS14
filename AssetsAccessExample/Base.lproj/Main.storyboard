@@ -20,33 +20,68 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSo-NB-JAa">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="103"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YPL-qt-VkB">
-                                        <rect key="frame" x="0.0" y="36.5" width="657" height="30"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZc-lO-lcS">
+                                        <rect key="frame" x="20" y="16.5" width="1004" height="70"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWQ-Y7-8pR">
-                                                <rect key="frame" x="0.0" y="0.0" width="136" height="30"/>
-                                                <state key="normal" title="Get location Access"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKE-py-XCb" userLabel="AddImagesForSelection">
-                                                <rect key="frame" x="146" y="0.0" width="164" height="30"/>
-                                                <state key="normal" title="AddImagesForSelection"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7U-bI-Ug0">
-                                                <rect key="frame" x="320" y="0.0" width="180" height="30"/>
-                                                <state key="normal" title="NO Access, Open settings"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtB-kv-iqh">
-                                                <rect key="frame" x="510" y="0.0" width="147" height="30"/>
-                                                <state key="normal" title="SelectWithoutAccess"/>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YPL-qt-VkB">
+                                                <rect key="frame" x="20" y="20" width="1017" height="30"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWQ-Y7-8pR">
+                                                        <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                                                        <state key="normal" title="Get location Access"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKE-py-XCb" userLabel="AddImagesForSelection">
+                                                        <rect key="frame" x="56" y="0.0" width="164" height="30"/>
+                                                        <state key="normal" title="AddImagesForSelection"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7U-bI-Ug0">
+                                                        <rect key="frame" x="230" y="0.0" width="180" height="30"/>
+                                                        <state key="normal" title="NO Access, Open settings"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtB-kv-iqh">
+                                                        <rect key="frame" x="420" y="0.0" width="147" height="30"/>
+                                                        <state key="normal" title="SelectWithoutAccess"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Npz-Vl-fIJ">
+                                                        <rect key="frame" x="577" y="0.0" width="99" height="30"/>
+                                                        <state key="normal" title="Get All Access"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vf-et-JPm">
+                                                        <rect key="frame" x="686" y="0.0" width="152" height="30"/>
+                                                        <state key="normal" title="Get Write Only access"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cte-w8-bkB">
+                                                        <rect key="frame" x="848" y="0.0" width="79" height="30"/>
+                                                        <state key="normal" title="WriteImage"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="QYa-hF-eM3">
+                                                        <rect key="frame" x="937" y="0.0" width="80" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" title="Load Saved"/>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="mSH-Sf-VWW"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
-                                    </stackView>
+                                        <constraints>
+                                            <constraint firstItem="YPL-qt-VkB" firstAttribute="leading" secondItem="oZc-lO-lcS" secondAttribute="leading" constant="20" symbolic="YES" id="W5p-q2-IIN"/>
+                                            <constraint firstItem="YPL-qt-VkB" firstAttribute="top" secondItem="oZc-lO-lcS" secondAttribute="top" constant="20" symbolic="YES" id="WeH-ks-Cyh"/>
+                                            <constraint firstAttribute="bottom" secondItem="YPL-qt-VkB" secondAttribute="bottom" constant="20" symbolic="YES" id="aNM-ou-C1S"/>
+                                            <constraint firstAttribute="trailing" secondItem="YPL-qt-VkB" secondAttribute="trailing" constant="20" symbolic="YES" id="rOa-9H-gxJ"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="contentLayoutGuide" id="Ajb-bm-WYv"/>
+                                        <viewLayoutGuide key="frameLayoutGuide" id="7N2-Il-fZv"/>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
+                                    <constraint firstItem="oZc-lO-lcS" firstAttribute="height" secondItem="NSo-NB-JAa" secondAttribute="height" multiplier="0.679612" id="2yY-LX-eJb"/>
+                                    <constraint firstItem="oZc-lO-lcS" firstAttribute="centerY" secondItem="NSo-NB-JAa" secondAttribute="centerY" id="ECg-cu-kid"/>
                                     <constraint firstAttribute="height" constant="103" id="GLv-V3-95S"/>
-                                    <constraint firstItem="YPL-qt-VkB" firstAttribute="leading" secondItem="NSo-NB-JAa" secondAttribute="leading" id="KlB-8h-G6A"/>
-                                    <constraint firstItem="YPL-qt-VkB" firstAttribute="centerY" secondItem="NSo-NB-JAa" secondAttribute="centerY" id="tKT-vO-xbO"/>
+                                    <constraint firstAttribute="trailing" secondItem="oZc-lO-lcS" secondAttribute="trailing" id="df6-QR-aIz"/>
+                                    <constraint firstItem="oZc-lO-lcS" firstAttribute="leading" secondItem="NSo-NB-JAa" secondAttribute="leading" constant="20" symbolic="YES" id="egB-UR-X4S"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="etl-4p-oZD">
@@ -86,16 +121,20 @@
                     </view>
                     <connections>
                         <outlet property="addImagesForSelectionButton" destination="WKE-py-XCb" id="Dhi-Mf-b4b"/>
+                        <outlet property="askAllAccessButton" destination="Npz-Vl-fIJ" id="zv9-ae-Eeg"/>
+                        <outlet property="askWriteOnlyAccessButton" destination="6vf-et-JPm" id="eNP-ti-u32"/>
                         <outlet property="collectionView" destination="etl-4p-oZD" id="gUc-ar-ecx"/>
+                        <outlet property="loadSavedAssets" destination="QYa-hF-eM3" id="Vhv-n2-WMp"/>
                         <outlet property="locationAccessButton" destination="rWQ-Y7-8pR" id="Gzb-ZP-j4P"/>
                         <outlet property="openSettingsButton" destination="Z7U-bI-Ug0" id="C2P-u4-ALW"/>
                         <outlet property="pickedImageView" destination="Px1-5p-lLf" id="hgb-qY-0Jc"/>
                         <outlet property="selectImageWithoutAccessButton" destination="NtB-kv-iqh" id="Hlt-eJ-3Wb"/>
+                        <outlet property="writeImageButton" destination="cte-w8-bkB" id="BQL-ys-6Tm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-572" y="-62"/>
+            <point key="canvasLocation" x="-523" y="-61"/>
         </scene>
     </scenes>
     <resources>

@@ -19,31 +19,51 @@ class ViewController: UIViewController {
     @IBOutlet var addImagesForSelectionButton: UIButton!
     @IBOutlet var selectImageWithoutAccessButton: UIButton!
     @IBOutlet var pickedImageView: UIImageView!
+    @IBOutlet var askAllAccessButton: UIButton!
+    @IBOutlet var askWriteOnlyAccessButton: UIButton!
+    @IBOutlet var writeImageButton: UIButton!
+    @IBOutlet var loadSavedAssets: UIButton!
     private var collectionController = RAVCollectionViewController()
 
     private let imagesManager = PHCachingImageManager()
     private let access = Access()
-    private let dataSource = DataSource()
+    private lazy var dataSource: DataSource = {
+        let dataSource = DataSource()
+        dataSource.delegate = self
+        return dataSource
+    }()
 
     private lazy var locationManager = CLLocationManager()
     private lazy var picker = PickerWithoutAccess()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource.delegate = self
-        // Do any additional setup after loading the view.
+
         self.configurePresenters()
         self.collectionController.setCollectionView(self.collectionView,
                                                     flowLayout: (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout) )
-        self.updateViewsVisibility()
-        self.access.requestAuthorization { [weak self](sender) in
-            guard let self = self else {
-                return
-            }
-            self.updateViewsVisibility()
+        self.configureActions()
+        let authList: [PHAuthorizationStatus]
+        if #available(iOS 14.0, *) {
+            authList = [.authorized, .limited]
+        } else {
+            authList = [.authorized]
+        }
+        if authList.contains(self.access.access()) {
             self.obtainAssets()
         }
+        self.updateViewsVisibility()
+    }
 
+    private func notify(message: String) {
+        let controller = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "OK",
+                                           style: .default,
+                                           handler: nil))
+        self.present(controller, animated: true, completion: nil)
+    }
+
+    fileprivate func configureActions() {
         self.openSettingsButton.addTarget(self,
                                           action: #selector(self.goToSettingsAction(_:)),
                                           for: .touchUpInside)
@@ -56,14 +76,20 @@ class ViewController: UIViewController {
         self.selectImageWithoutAccessButton.addTarget(self,
                                                       action: #selector(self.selectWithoutAccess(_:)),
                                                       for: .touchUpInside)
-    }
-
-    private func notify(message: String) {
-        let controller = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        controller.addAction(UIAlertAction(title: "OK",
-                                           style: .default,
-                                           handler: nil))
-        self.present(controller, animated: true, completion: nil)
+        self.askAllAccessButton.addTarget(self,
+                                          action: #selector(self.askAllAccess(_:)),
+                                          for: .touchUpInside)
+        if #available(iOS 14.0, *) {
+            self.askWriteOnlyAccessButton.addTarget(self,
+                                                    action: #selector(self.askWriteOnlyAccess(_:)),
+                                                    for: .touchUpInside)
+        }
+        self.writeImageButton.addTarget(self,
+                                        action: #selector(self.writeImage(_:)),
+                                        for: .touchUpInside)
+        self.loadSavedAssets.addTarget(self,
+                                       action: #selector(self.loadSavedAssets(_:)),
+                                       for: .touchUpInside)
     }
 
 }
@@ -95,10 +121,53 @@ extension ViewController {
             }
         }
     }
+
+    @available(iOS 14, *)
+    @objc private func askWriteOnlyAccess(_ sender: Any?) {
+        self.access.requestAuthorization(for: .addOnly) { [weak self](sender) in
+            guard let self = self else {
+                return
+            }
+            self.updateViewsVisibility()
+            self.obtainAssets()
+        }
+    }
+
+    @objc private func askAllAccess(_ sender: Any?) {
+        self.access.requestAuthorization { [weak self](sender) in
+            guard let self = self else {
+                return
+            }
+            self.updateViewsVisibility()
+            self.obtainAssets()
+        }
+    }
+
+    @objc private func writeImage(_ sender: Any?) {
+        let image = UIImage(named: "1.jpg")!
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+    }
+
+    @objc private func loadSavedAssets(_ sender: Any?) {
+
+        let options = PHFetchOptions()
+        let fetchResult:PHFetchResult<PHAsset> = PHAsset.fetchAssets(with: options)
+
+        var uids = [String]()
+        for index in 0..<fetchResult.count {
+            uids.append(fetchResult.object(at: index).localIdentifier)
+        }
+        print("loaded uids: \(uids)")
+    }
 }
 
 //MARK: Private methods
 extension ViewController {
+    private func authList(_ statuses:PHAuthorizationStatus...) -> [PHAuthorizationStatus] {
+        let result = Array<PHAuthorizationStatus>(statuses)
+        return result
+    }
+
     private func configurePresenters() {
         collectionController.register(AssetImageCellModelPresenter(imageManager: self.imagesManager))
     }
@@ -106,12 +175,8 @@ extension ViewController {
     private func updateViewsVisibility() {
         let access = self.access.access()
 
-        let builder = { (array: [PHAuthorizationStatus]) -> [PHAuthorizationStatus] in
-            return array
-        }
-
-        self.collectionView.isHidden = builder([.denied, .notDetermined, .restricted]).contains(access)
-        self.openSettingsButton.isHidden = builder([.authorized, .notDetermined]).contains(access)
+        self.collectionView.isHidden = authList(.denied, .notDetermined, .restricted).contains(access)
+        self.openSettingsButton.isHidden =  authList(.authorized, .notDetermined).contains(access)
         let isLimitedAccess: Bool
         if #available(iOS 14.0, *) {
             isLimitedAccess = (access == .limited)
@@ -128,12 +193,31 @@ extension ViewController {
         }
         let shouldSelectWithoutAccess: Bool
         if #available(iOS 14.0, *) {
-            shouldSelectWithoutAccess = builder([.denied, .restricted]).contains(access)
+            shouldSelectWithoutAccess = authList(.denied, .restricted).contains(access)
         } else {
             shouldSelectWithoutAccess = false
         }
         self.selectImageWithoutAccessButton.isHidden = !shouldSelectWithoutAccess
         self.pickedImageView.isHidden = !shouldSelectWithoutAccess
+
+        if #available(iOS 14.0 , *) {
+            self.askAllAccessButton.isHidden = false
+            self.askWriteOnlyAccessButton.isHidden = false
+        } else {
+            self.askAllAccessButton.isHidden = false
+            self.askWriteOnlyAccessButton.isHidden = true
+        }
+
+        if #available(iOS 14.0, *) {
+            let levels: [PHAuthorizationStatus] = [.authorized, .limited]
+            let shouldHideWriteButton = (!levels.contains(self.access.access(for: .addOnly)) &&
+                                            !levels.contains(self.access.access(for: .readWrite)))
+            self.writeImageButton.isHidden = shouldHideWriteButton
+            self.loadSavedAssets.isHidden = shouldHideWriteButton
+        } else {
+            self.writeImageButton.isHidden = self.access.access() != .authorized
+            self.loadSavedAssets.isHidden = true
+        }
     }
 
     private func obtainAssets() {
