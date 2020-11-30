@@ -23,15 +23,18 @@ class ViewController: UIViewController {
 
     private let imagesManager = PHCachingImageManager()
     private let access = Access()
-    private let dataSource = DataSource()
+    private lazy var dataSource: DataSource =  {
+        let dataSource = DataSource()
+        dataSource.delegate = self
+        return dataSource
+    }()
 
     private lazy var locationManager = CLLocationManager()
     private lazy var picker = PickerWithoutAccess()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource.delegate = self
-        // Do any additional setup after loading the view.
+
         self.configurePresenters()
         self.collectionController.setCollectionView(self.collectionView,
                                                     flowLayout: (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout) )
