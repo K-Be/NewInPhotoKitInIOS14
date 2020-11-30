@@ -21,7 +21,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>I need access to photo library</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Access only description</string>
+	<string>Write only description</string>
 	<key>NSLocationUsageDescription</key>
 	<string>I need to check access to photos</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
