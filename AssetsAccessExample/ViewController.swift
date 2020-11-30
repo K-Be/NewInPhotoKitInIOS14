@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
     private let imagesManager = PHCachingImageManager()
     private let access = Access()
-    private let dataSource = DataSource()
+    private lazy var dataSource = DataSource()
 
     private lazy var locationManager = CLLocationManager()
 
